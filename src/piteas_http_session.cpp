@@ -16,6 +16,8 @@ namespace net = boost::asio;
 namespace ssl = boost::asio::ssl;
 using tcp = net::ip::tcp;
 
+auto API_URI = "sdk.piteas.io";
+
 struct HTTPSession::P {
     net::io_context m_ioc;
     std::string m_uri;
@@ -23,22 +25,19 @@ struct HTTPSession::P {
 };
 
 HTTPSession::HTTPSession() : m_p(std::make_unique<P>()) {
+    m_p->m_uri = API_URI;
 }
 
 HTTPSession::~HTTPSession() = default;
 
-http::response<http::string_body> HTTPSession::get(const std::string& target) {
-    std::string finalTarget = target;
-
-    std::string endpoint;
-
-    http::request<http::string_body> req{http::verb::get, endpoint, 11};
+http::response<http::string_body> HTTPSession::get(const std::string& target) const {
+    const http::request<http::string_body> req{http::verb::get, target, 11};
     return m_p->request(req);
 }
 
 http::response<http::string_body> HTTPSession::P::request(
     http::request<http::string_body> req) {
-    req.set(http::field::host, m_uri.c_str());
+    req.set(http::field::host, m_uri);
     req.set(http::field::user_agent, BOOST_BEAST_VERSION_STRING);
 
     ssl::context ctx{ssl::context::sslv23_client};

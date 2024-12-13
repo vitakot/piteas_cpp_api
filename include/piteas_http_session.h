@@ -24,7 +24,7 @@ class HTTPSession {
 public:
     HTTPSession();
     ~HTTPSession();
-    http::response<http::string_body> get(const std::string& target);
+    http::response<http::string_body> get(const std::string& target) const;
 };
 }
 #endif // INCLUDE_PITEAS_HTTP_SESSION_H

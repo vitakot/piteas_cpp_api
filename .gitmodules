@@ -1,0 +1,3 @@
+[submodule "vk_tools"]
+	path = vk_tools
+	url = git@github.com:vitakot/vk_tools.git
