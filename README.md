@@ -1,1 +1,4 @@
-# piteas_api
+# Piteas C++ API
+
+See https://docs.piteas.io/
+
