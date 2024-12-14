@@ -37,7 +37,7 @@ void Quote::fromJson(const nlohmann::json& json) {
     readValue<std::string>(json, "destAmount", destAmountString);
 
     const boost::multiprecision::int128_t srcAmount(srcAmountString);
-    const boost::multiprecision::int128_t destAmount(srcAmountString);
+    const boost::multiprecision::int128_t destAmount(destAmountString);
 
     m_srcAmount = EthereumDecimal(srcAmount) * EthereumWEI;
     m_destAmount = EthereumDecimal(destAmount) * EthereumWEI;
