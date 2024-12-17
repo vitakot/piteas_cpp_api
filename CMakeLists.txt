@@ -8,9 +8,9 @@ if(POLICY CMP0167)
 endif()
 
 find_package(OpenSSL REQUIRED)
-add_subdirectory(vk_tools)
+add_subdirectory(vk_cpp_tools)
 
-include_directories(include vk_tools/include SYSTEM ${OPENSSL_INCLUDE_DIR})
+include_directories(include vk_cpp_tools/include SYSTEM ${OPENSSL_INCLUDE_DIR})
 
 set(HEADERS include/piteas_client.h
         include/piteas_http_session.h
