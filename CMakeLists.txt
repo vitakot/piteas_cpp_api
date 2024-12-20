@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(piteas_cpp_api)
+project(piteas_api)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -8,7 +8,10 @@ if(POLICY CMP0167)
 endif()
 
 find_package(OpenSSL REQUIRED)
-add_subdirectory(vk_cpp_tools)
+
+if (NOT TARGET vk_tools)
+    add_subdirectory(vk_cpp_tools)
+endif()
 
 include_directories(include vk_cpp_tools/include SYSTEM ${OPENSSL_INCLUDE_DIR})
 
@@ -20,8 +23,8 @@ set(SOURCES src/piteas_client.cpp
         src/piteas_http_session.cpp
         src/piteas_models.cpp)
 
-add_library(piteas_cpp_api OBJECT ${SOURCES} ${HEADERS})
-target_link_libraries(piteas_cpp_api PRIVATE OpenSSL::Crypto OpenSSL::SSL vk_tools)
+add_library(piteas_api OBJECT ${SOURCES} ${HEADERS})
+target_link_libraries(piteas_api PRIVATE OpenSSL::Crypto OpenSSL::SSL vk_tools)
 
-add_executable(test test/main.cpp)
-target_link_libraries(test PRIVATE piteas_cpp_api)
+add_executable(test_piteas_api test/main.cpp)
+target_link_libraries(test_piteas_api PRIVATE piteas_api)
