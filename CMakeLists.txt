@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(piteas_ccapi)
+project(piteas_cpp_api)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -20,8 +20,8 @@ set(SOURCES src/piteas_client.cpp
         src/piteas_http_session.cpp
         src/piteas_models.cpp)
 
-add_library(piteas_ccapi OBJECT ${SOURCES} ${HEADERS})
-target_link_libraries(piteas_ccapi PRIVATE OpenSSL::Crypto OpenSSL::SSL vk_tools)
+add_library(piteas_cpp_api OBJECT ${SOURCES} ${HEADERS})
+target_link_libraries(piteas_cpp_api PRIVATE OpenSSL::Crypto OpenSSL::SSL vk_tools)
 
 add_executable(test test/main.cpp)
-target_link_libraries(test PRIVATE piteas_ccapi)
+target_link_libraries(test PRIVATE piteas_cpp_api)
